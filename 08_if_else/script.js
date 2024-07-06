@@ -7,15 +7,17 @@ function numberToWords(num) {
 
     if (num === 0) return 'ноль';
 
+    if (num < 0) return 'минус ' + numberToWords(-num);
+
     if (num < 10) return ones[num];
     if (num >= 10 && num < 20) return teens[num - 10];
 
     if (num < 100) {
-        return tens[Math.floor(num / 10)] + ' ' + ones[num % 10];
+        return tens[Math.floor(num / 10)] + (num % 10 != 0 ? ' ' + ones[num % 10] : '');
     }
 
     if (num < 1000) {
-        return hundreds[Math.floor(num / 100)] + ' ' + numberToWords(num % 100);
+        return hundreds[Math.floor(num / 100)] + (num % 100 != 0 ? ' ' + numberToWords(num % 100) : '');
     }
 
     return num.toString(); // Для чисел более 999 возвращаем числовое значение
@@ -39,6 +41,9 @@ function startGame() {
     maxValue = parseInt(document.getElementById('max-value').value, 10);
     minValue = Math.max(-999, Math.min(999, isNaN(minValue) ? 0 : minValue));
     maxValue = Math.max(-999, Math.min(999, isNaN(maxValue) ? 100 : maxValue));
+    if (minValue > maxValue) {
+        [minValue, maxValue] = [maxValue, minValue]; // Переставляем значения, если minValue больше maxValue
+    }
     orderNumber = 1;
     gameRun = true;
     answerNumber = Math.floor((minValue + maxValue) / 2);
@@ -68,7 +73,7 @@ document.getElementById('btnOver').addEventListener('click', function() {
             answerField.innerText = phrases[Math.floor(Math.random() * phrases.length)];
             gameRun = false;
         } else {
-            minValue = Math.min(answerNumber + 1, maxValue);
+            minValue = answerNumber + 1;
             answerNumber = Math.floor((minValue + maxValue) / 2);
             orderNumber++;
             orderNumberField.innerText = orderNumber;
@@ -88,7 +93,7 @@ document.getElementById('btnLess').addEventListener('click', function() {
             answerField.innerText = phrases[Math.floor(Math.random() * phrases.length)];
             gameRun = false;
         } else {
-            maxValue = Math.max(answerNumber - 1, minValue);
+            maxValue = answerNumber - 1;
             answerNumber = Math.floor((minValue + maxValue) / 2);
             orderNumber++;
             orderNumberField.innerText = orderNumber;
