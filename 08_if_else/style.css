@@ -1,7 +1,92 @@
-.game-card {
+body {
+    font-family: 'Open Sans', sans-serif;
+    background: linear-gradient(270deg, #8e2de2, #4a00e0, #8e2de2, #4a00e0); /* Фиолетовый градиент */
+    background-size: 400% 400%;
+    animation: gradientAnimation 15s ease infinite;
     height: 100vh;
-    font-family: 'Open Sans', monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.container { background-color: blue;
-} 
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.card {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+.btn-info {
+    background-color: #6c63ff; /* Темно-фиолетовый цвет */
+    border-color: #6c63ff;
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.btn-info:hover {
+    background-color: #483d8b; /* Более темный фиолетовый при наведении */
+    border-color: #483d8b;
+}
+
+.btn-success {
+    background-color: #ff5c8a; /* Коралловый цвет */
+    border-color: #ff5c8a;
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.btn-success:hover {
+    background-color: #ff3366; /* Более темный коралловый при наведении */
+    border-color: #ff3366;
+}
+
+.modal-content {
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.btn-group button {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+.card-footer button {
+    transition: color 0.3s ease;
+    font-size: 1.2em;
+}
+
+.card-footer button:hover {
+    color: #4a00e0; /* Фиолетовый цвет при наведении */
+}
